@@ -10,7 +10,7 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44360/',
+    issuer: 'https://localhost:5000/',
     redirectUri: baseUrl,
     clientId: 'Management_App',
     responseType: 'code',
@@ -19,7 +19,7 @@ export const environment = {
   },
   apis: {
     default: {
-      url: 'https://localhost:44375',
+      url: 'https://localhost:5001',
       rootNamespace: 'HR.Management',
     },
   },
