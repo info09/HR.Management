@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HR.Management.Departments;
+using HR.Management.Employees;
 using HR.Management.Positions;
 using HR.Management.Projects;
 
@@ -24,5 +25,9 @@ public class ManagementApplicationAutoMapperProfile : Profile
         CreateMap<Project, ProjectDto>();
         CreateMap<Project, ProjectInListDto>();
         CreateMap<CreateUpdateProjectDto, Project>();
+
+        CreateMap<Employee, EmployeeDto>();
+        CreateMap<Employee, EmployeeInListDto>();
+        CreateMap<CreateUpdateEmployeeDto, Employee>();
     }
 }

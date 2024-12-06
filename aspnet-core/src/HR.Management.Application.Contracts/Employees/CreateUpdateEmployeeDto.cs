@@ -1,9 +1,8 @@
 ﻿using System;
-using Volo.Abp.Domain.Entities.Auditing;
 
 namespace HR.Management.Employees
 {
-    public class Employee : FullAuditedAggregateRoot<Guid>
+    public class CreateUpdateEmployeeDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -26,6 +25,5 @@ namespace HR.Management.Employees
         public string BankAccountNumber { get; set; }
         public string TaxCode { get; set; }
         public string SocialInsurance { get; set; }
-        public bool IsActive { get; set; }
     }
 }
