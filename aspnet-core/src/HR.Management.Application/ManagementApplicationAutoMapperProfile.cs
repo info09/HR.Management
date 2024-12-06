@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HR.Management.Departments;
 
 namespace HR.Management;
 
@@ -9,5 +10,9 @@ public class ManagementApplicationAutoMapperProfile : Profile
         /* You can configure your AutoMapper mapping configuration here.
          * Alternatively, you can split your mapping configurations
          * into multiple profile classes for a better organization. */
+
+        CreateMap<Department, DepartmentDto>();
+        CreateMap<Department, DepartmentInListDto>();
+        CreateMap<CreateUpdateDepartmentDto, Department>();
     }
 }
