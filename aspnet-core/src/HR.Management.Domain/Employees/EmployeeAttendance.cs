@@ -3,7 +3,7 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace HR.Management.Employees
 {
-    public class Attendance : CreationAuditedEntity<Guid>
+    public class EmployeeAttendance : CreationAuditedEntity<Guid>
     {
         public Guid EmployeeId { get; set; }
         public DateTime Date { get; set; }

@@ -1,4 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HR.Management.Configurations.Departments;
+using HR.Management.Configurations.Employees;
+using HR.Management.Departments;
+using HR.Management.Employees;
+using HR.Management.Positions;
+using HR.Management.Projects;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -50,6 +56,17 @@ public class ManagementDbContext :
     public DbSet<Tenant> Tenants { get; set; }
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
+    // Domain
+    public DbSet<Department> Departments { get; set; }
+    public DbSet<Employee> Employees { get; set; }
+    public DbSet<EmployeeAttendance> EmployeeAttendances { get; set; }
+    public DbSet<EmployeeDependent> EmployeeDependents { get; set; }
+    public DbSet<EmployeeDocument> EmployeeDocuments { get; set; }
+    public DbSet<EmployeeEducation> EmployeeEducations { get; set; }
+    public DbSet<EmployeeLeave> EmployeeLeaves { get; set; }
+    public DbSet<EmployeeProject> EmployeeProjects { get; set; }
+    public DbSet<Project> Projects { get; set; }
+    public DbSet<Position> Positions { get; set; }
     #endregion
 
     public ManagementDbContext(DbContextOptions<ManagementDbContext> options)
@@ -81,5 +98,16 @@ public class ManagementDbContext :
         //    b.ConfigureByConvention(); //auto configure for the base class props
         //    //...
         //});
+
+        builder.ApplyConfiguration(new DepartmentConfiguration());
+        builder.ApplyConfiguration(new ProjectConfiguration());
+        builder.ApplyConfiguration(new PositionConfiguration());
+        builder.ApplyConfiguration(new EmployeeConfiguration());
+        builder.ApplyConfiguration(new EmployeeAttendanceConfiguration());
+        builder.ApplyConfiguration(new EmployeeDependentConfiguration());
+        builder.ApplyConfiguration(new EmployeeDocumentConfiguration());
+        builder.ApplyConfiguration(new EmployeeEducationConfiguration());
+        builder.ApplyConfiguration(new EmployeeLeaveConfiguration());
+        builder.ApplyConfiguration(new EmployeeProjectConfiguration());
     }
 }

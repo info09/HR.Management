@@ -1,7 +1,7 @@
 ﻿using System;
 using Volo.Abp.Domain.Entities;
 
-namespace HR.Management.Projects
+namespace HR.Management.Employees
 {
     public class EmployeeProject : Entity
     {
@@ -12,7 +12,7 @@ namespace HR.Management.Projects
 
         public override object[] GetKeys()
         {
-            return [EmployeeId, ProjectId];
+            return new object[] { EmployeeId, ProjectId };
         }
     }
 }
