@@ -6,6 +6,7 @@ namespace HR.Management.Positions
     public class Position : CreationAuditedAggregateRoot<Guid>
     {
         public string Name { get; set; }
+        public string Code { get; set; }
         public decimal BaseSalary { get; set; }
     }
 }

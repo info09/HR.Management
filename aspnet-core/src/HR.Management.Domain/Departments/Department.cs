@@ -6,6 +6,7 @@ namespace HR.Management.Departments
     public class Department : CreationAuditedAggregateRoot<Guid>
     {
         public string Name { get; set; }
+        public string Code { get; set; }
         public string Location { get; set; }
     }
 }
