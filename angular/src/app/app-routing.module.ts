@@ -18,6 +18,11 @@ const routes: Routes = [
     loadChildren: () => import('./department/department.module').then(m => m.DepartmentModule),
     component: AppLayoutComponent,
   },
+  {
+    path: 'position',
+    loadChildren: () => import('./position/position.module').then(m => m.PositionModule),
+    component: AppLayoutComponent,
+  },
   // {
   //   path: 'account',
   //   loadChildren: () => import('@abp/ng.account').then(m => m.AccountModule.forLazy()),

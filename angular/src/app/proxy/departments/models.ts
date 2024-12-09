@@ -20,15 +20,18 @@ export interface DepartmentInListDto extends EntityDto<string> {
 
 export interface CreateUpdatePositionDto {
   name?: string;
-  location?: string;
+  code?: string;
+  baseSalary: number;
 }
 
 export interface PositionDto extends EntityDto<string> {
   name?: string;
-  location?: string;
+  code?: string;
+  baseSalary: number;
 }
 
 export interface PositionInListDto extends EntityDto<string> {
   name?: string;
-  location?: string;
+  code?: string;
+  baseSalary: number;
 }
