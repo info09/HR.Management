@@ -21,7 +21,8 @@ namespace HR.Management.Employees
         public string EmergencyContact { get; set; }
         public string EmergencyPhone { get; set; }
         public string EducationLevel { get; set; }
-        public byte[] Photo { get; set; }
+        public string ThumbnailPictureName { get; set; }
+        public string ThumbnailPictureContent { get; set; }
         public string BankAccountNumber { get; set; }
         public string TaxCode { get; set; }
         public string SocialInsurance { get; set; }
