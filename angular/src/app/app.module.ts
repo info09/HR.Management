@@ -15,6 +15,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { APP_ROUTE_PROVIDER } from './route.provider';
 import { AppLayoutModule } from './layout/app.layout.module';
+import { NotificationService } from './shared/services/notification.service';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
+import { UtilityService } from './shared/services/utility.service';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   imports: [
@@ -26,16 +32,25 @@ import { AppLayoutModule } from './layout/app.layout.module';
       environment,
       registerLocaleFn: registerLocale(),
     }),
-    //ThemeSharedModule.forRoot(),
+    ThemeSharedModule.forRoot(),
     AccountConfigModule.forRoot(),
     IdentityConfigModule.forRoot(),
     TenantManagementConfigModule.forRoot(),
     SettingManagementConfigModule.forRoot(),
-    // ThemeLeptonXModule.forRoot(),
-    // SideMenuLayoutModule.forRoot(),
+    ThemeLeptonXModule.forRoot(),
+    SideMenuLayoutModule.forRoot(),
+    ConfirmDialogModule,
+    ToastModule,
   ],
   declarations: [AppComponent],
-  providers: [APP_ROUTE_PROVIDER],
+  providers: [
+    APP_ROUTE_PROVIDER,
+    NotificationService,
+    DialogService,
+    MessageService,
+    UtilityService,
+    ConfirmationService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
