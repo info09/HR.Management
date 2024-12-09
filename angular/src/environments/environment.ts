@@ -12,9 +12,10 @@ export const environment = {
   oAuthConfig: {
     issuer: 'https://localhost:5000/',
     redirectUri: baseUrl,
-    clientId: 'Management_App',
+    clientId: 'Management_Admin',
+    dummyClientSecret: '1q2w3e*',
     responseType: 'code',
-    scope: 'offline_access Management',
+    scope: 'offline_access Management.Admin',
     requireHttps: true,
   },
   apis: {
