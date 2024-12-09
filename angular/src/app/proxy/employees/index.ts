@@ -1,3 +1,3 @@
 export * from './employee.service';
-export * from './gender.enum';
+export * from './gender-type.enum';
 export * from './models';

@@ -4,6 +4,7 @@ using HR.Management.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -12,9 +13,10 @@ using Volo.Abp.EntityFrameworkCore;
 namespace HR.Management.Migrations
 {
     [DbContext(typeof(ManagementDbContext))]
-    partial class ManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241209083647_UpdateEntity_Code_Table_Employee")]
+    partial class UpdateEntity_Code_Table_Employee
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,7 +124,7 @@ namespace HR.Management.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GenderType")
+                    b.Property<int>("Gender")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("HireDate")

@@ -24,6 +24,10 @@ export class AppMenuComponent implements OnInit {
           { label: 'Vị trí', icon: 'pi pi-fw pi-circle', routerLink: ['/position'] },
         ],
       },
+      {
+        label: 'Thông tin nhân viên',
+        items: [{ label: 'Nhân viên', icon: 'pi pi-fw pi-circle', routerLink: ['/employee'] }],
+      },
     ];
   }
 }

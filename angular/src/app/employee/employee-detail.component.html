@@ -1,0 +1,222 @@
+<form [formGroup]="form" skipValidation (ngSubmit)="saveChange()">
+  <p-panel #pnl header="Danh sách sản phẩm">
+    <!--form grid-->
+    <div class="formgrid grid">
+      <div class="field col-12">
+        <label for="code" class="block">Mã nhân viên <span class="required">*</span></label>
+        <input id="code" pInputText type="text" class="w-full" formControlName="code" ð />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="code"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="firstName" class="block">Họ <span class="required">*</span></label>
+        <input id="firstName" pInputText type="text" class="w-full" formControlName="firstName" ð />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="firstName"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="lastName" class="block">Tên <span class="required">*</span></label>
+        <input id="lastName" pInputText type="text" class="w-full" formControlName="lastName" ð />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="lastName"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="departmentId" class="block">Chi nhánh<span class="required">*</span></label>
+        <p-dropdown
+          [options]="departments"
+          formControlName="departmentId"
+          placeholder="Chọn chi nhánh"
+          [showClear]="true"
+          autoWidth="false"
+          [style]="{ width: '100%' }"
+        ></p-dropdown>
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="departmentId"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="positionId" class="block">Vị trí<span class="required">*</span></label>
+        <p-dropdown
+          [options]="departments"
+          formControlName="positionId"
+          placeholder="Chọn vị trí"
+          [showClear]="true"
+          autoWidth="false"
+          [style]="{ width: '100%' }"
+        ></p-dropdown>
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="positionId"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="genderType" class="block">Giới tính<span class="required">*</span></label>
+        <p-dropdown
+          [options]="genderTypes"
+          formControlName="genderType"
+          placeholder="Chọn chi nhánh"
+          [showClear]="true"
+          autoWidth="false"
+          [style]="{ width: '100%' }"
+        ></p-dropdown>
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="genderType"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="address" class="block">Địa chỉ</label>
+        <input id="address" pInputText class="w-full" type="text" formControlName="address" ð />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="address"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="email" class="block">Email</label>
+        <input id="email" pInputText class="w-full" type="text" formControlName="email" ð />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="email"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+
+      <div class="field col-12">
+        <label for="hireDate" class="block">Ngày vào làm</label>
+        <input id="hireDate" pInputText class="w-full" type="text" formControlName="hireDate" ð />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="hireDate"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="salary" class="block">Mức lương</label>
+        <input id="salary" pInputText class="w-full" type="text" formControlName="salary" ð />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="salary"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="nationality" class="block">Quốc tịch</label>
+        <input
+          id="nationality"
+          pInputText
+          class="w-full"
+          type="text"
+          formControlName="nationality"
+          ð
+        />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="nationality"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="maritalStatus" class="block">Tình trạng hôn nhân</label>
+        <input
+          id="maritalStatus"
+          pInputText
+          class="w-full"
+          type="text"
+          formControlName="maritalStatus"
+          ð
+        />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="maritalStatus"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="educationLevel" class="block">Trình độ học vấn</label>
+        <input
+          id="educationLevel"
+          pInputText
+          class="w-full"
+          type="text"
+          formControlName="educationLevel"
+          ð
+        />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="educationLevel"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="bankAccountNumber" class="block">Số tài khoản ngân hàng</label>
+        <input
+          id="bankAccountNumber"
+          pInputText
+          class="w-full"
+          type="text"
+          formControlName="bankAccountNumber"
+          ð
+        />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="bankAccountNumber"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="taxCode" class="block">Mã số thuế cá nhân</label>
+        <input id="taxCode" pInputText class="w-full" type="text" formControlName="taxCode" ð />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="taxCode"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="socialInsurance" class="block">Số sổ BHXH</label>
+        <input
+          id="socialInsurance"
+          pInputText
+          class="w-full"
+          type="text"
+          formControlName="socialInsurance"
+          ð
+        />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="socialInsurance"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <button
+        type="submit"
+        [disabled]="!form.valid || btnDisabled"
+        pButton
+        icon="fa fa-save"
+        iconPos="left"
+        label="Lưu lại"
+      ></button>
+    </ng-template>
+    <!--Block UI-->
+    <p-blockUI [blocked]="blockedPanel" [target]="pnl">
+      <p-progressSpinner></p-progressSpinner>
+    </p-blockUI>
+  </p-panel>
+</form>

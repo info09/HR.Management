@@ -23,24 +23,11 @@ const routes: Routes = [
     loadChildren: () => import('./position/position.module').then(m => m.PositionModule),
     component: AppLayoutComponent,
   },
-  // {
-  //   path: 'account',
-  //   loadChildren: () => import('@abp/ng.account').then(m => m.AccountModule.forLazy()),
-  // },
-  // {
-  //   path: 'identity',
-  //   loadChildren: () => import('@abp/ng.identity').then(m => m.IdentityModule.forLazy()),
-  // },
-  // {
-  //   path: 'tenant-management',
-  //   loadChildren: () =>
-  //     import('@abp/ng.tenant-management').then(m => m.TenantManagementModule.forLazy()),
-  // },
-  // {
-  //   path: 'setting-management',
-  //   loadChildren: () =>
-  //     import('@abp/ng.setting-management').then(m => m.SettingManagementModule.forLazy()),
-  // },
+  {
+    path: 'employee',
+    loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule),
+    component: AppLayoutComponent,
+  },
 ];
 
 @NgModule({

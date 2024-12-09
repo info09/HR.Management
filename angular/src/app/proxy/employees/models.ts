@@ -1,4 +1,4 @@
-import type { Gender } from './gender.enum';
+import type { GenderType } from './gender-type.enum';
 import type { EntityDto } from '@abp/ng.core';
 import type { BaseListFilter } from '../models';
 
@@ -6,7 +6,7 @@ export interface CreateUpdateEmployeeDto {
   firstName?: string;
   lastName?: string;
   dateOfBirth?: string;
-  gender: Gender;
+  genderType: GenderType;
   phoneNumber?: string;
   email?: string;
   address?: string;
@@ -27,10 +27,11 @@ export interface CreateUpdateEmployeeDto {
 }
 
 export interface EmployeeDto extends EntityDto<string> {
+  code?: string;
   firstName?: string;
   lastName?: string;
   dateOfBirth?: string;
-  gender: Gender;
+  genderType: GenderType;
   phoneNumber?: string;
   email?: string;
   address?: string;
@@ -51,10 +52,11 @@ export interface EmployeeDto extends EntityDto<string> {
 }
 
 export interface EmployeeInListDto extends EntityDto<string> {
+  code?: string;
   firstName?: string;
   lastName?: string;
   dateOfBirth?: string;
-  gender: Gender;
+  genderType: GenderType;
   phoneNumber?: string;
   email?: string;
   address?: string;
