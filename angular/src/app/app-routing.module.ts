@@ -28,6 +28,11 @@ const routes: Routes = [
     loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule),
     component: AppLayoutComponent,
   },
+  {
+    path: 'system',
+    loadChildren: () => import('./system/system.module').then(m => m.SystemModule),
+    component: AppLayoutComponent,
+  },
 ];
 
 @NgModule({
