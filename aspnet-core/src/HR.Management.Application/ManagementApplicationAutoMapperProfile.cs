@@ -3,6 +3,9 @@ using HR.Management.Departments;
 using HR.Management.Employees;
 using HR.Management.Positions;
 using HR.Management.Projects;
+using HR.Management.Roles;
+using HR.Management.Systems.Roles;
+using Volo.Abp.Identity;
 
 namespace HR.Management;
 
@@ -29,5 +32,20 @@ public class ManagementApplicationAutoMapperProfile : Profile
         CreateMap<Employee, EmployeeDto>();
         CreateMap<Employee, EmployeeInListDto>();
         CreateMap<CreateUpdateEmployeeDto, Employee>();
+
+        //Role
+        CreateMap<IdentityRole, RoleDto>().ForMember(x => x.Description,
+            map => map.MapFrom(x => x.ExtraProperties.ContainsKey(RoleConsts.DescriptionFieldName)
+            ?
+            x.ExtraProperties[RoleConsts.DescriptionFieldName]
+            :
+            null));
+        CreateMap<IdentityRole, RoleInListDto>().ForMember(x => x.Description,
+            map => map.MapFrom(x => x.ExtraProperties.ContainsKey(RoleConsts.DescriptionFieldName)
+            ?
+            x.ExtraProperties[RoleConsts.DescriptionFieldName]
+            :
+            null));
+        CreateMap<CreateUpdateRoleDto, IdentityRole>();
     }
 }
