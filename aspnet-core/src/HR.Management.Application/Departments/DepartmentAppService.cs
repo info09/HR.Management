@@ -1,5 +1,6 @@
 ﻿
 
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace HR.Management.Departments
 {
+    [Authorize]
     public class DepartmentAppService : CrudAppService<Department, DepartmentDto, Guid, PagedResultRequestDto, CreateUpdateDepartmentDto, CreateUpdateDepartmentDto>, IDepartmentAppService
     {
         public DepartmentAppService(IRepository<Department, Guid> repository) : base(repository)

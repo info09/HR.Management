@@ -1,4 +1,5 @@
 ﻿using HR.Management.Departments;
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace HR.Management.Positions
 {
+    [Authorize]
     public class PositionAppService : CrudAppService<Position, PositionDto, Guid, PagedResultRequestDto, CreateUpdatePositionDto, CreateUpdatePositionDto>, IPositionAppService
     {
         public PositionAppService(IRepository<Position, Guid> repository) : base(repository)
