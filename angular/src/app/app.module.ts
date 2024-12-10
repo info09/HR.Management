@@ -24,7 +24,9 @@ import { ToastModule } from 'primeng/toast';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 import { GlobalHttpInterceptorService } from './shared/interceptors/error-handler.interceptor';
-
+import { registerLocaleData } from '@angular/common';
+import localeVi from '@angular/common/locales/vi';
+registerLocaleData(localeVi);
 @NgModule({
   imports: [
     BrowserModule,

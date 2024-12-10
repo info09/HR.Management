@@ -8,6 +8,7 @@ import { MessageConstants } from 'src/app/shared/constants/messages.const';
 import { UserDto, UserInListDto, UserService } from '@proxy/systems/users';
 import { UserDetailComponent } from './user-detail.component';
 import { SetPasswordComponent } from './set-password.component';
+import { RoleAssignComponent } from './role-assign.component';
 
 @Component({
   selector: 'app-user',
@@ -132,22 +133,22 @@ export class UserComponent implements OnInit, OnDestroy {
       });
   }
 
-  //   assignRole(id: string) {
-  //     const ref = this.dialogService.open(RoleAssignComponent, {
-  //       data: {
-  //         id: id,
-  //       },
-  //       header: 'Gán quyền',
-  //       width: '70%',
-  //     });
+  assignRole(id: string) {
+    const ref = this.dialogService.open(RoleAssignComponent, {
+      data: {
+        id: id,
+      },
+      header: 'Gán quyền',
+      width: '70%',
+    });
 
-  //     ref.onClose.subscribe((result: boolean) => {
-  //       if (result) {
-  //         this.notificationService.showSuccess(MessageConstants.ROLE_ASSIGN_SUCCESS_MSG);
-  //         this.loadData();
-  //       }
-  //     });
-  //   }
+    ref.onClose.subscribe((result: boolean) => {
+      if (result) {
+        this.notificationService.showSuccess(MessageConstants.ROLE_ASSIGN_SUCCESS_MSG);
+        this.loadData();
+      }
+    });
+  }
 
   setPassword(id: string) {
     const ref = this.dialogService.open(SetPasswordComponent, {
