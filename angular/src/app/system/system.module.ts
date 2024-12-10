@@ -23,9 +23,18 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { ManagerSharedModule } from '../shared/modules/manager-shared.module';
 import { RoleComponent } from './role/role.component';
 import { RoleDetailComponent } from './role/role-detail.component';
+import { UserComponent } from './user/user.component';
+import { UserDetailComponent } from './user/user-detail.component';
+import { SetPasswordComponent } from './user/set-password.component';
 
 @NgModule({
-  declarations: [RoleComponent, RoleDetailComponent],
+  declarations: [
+    RoleComponent,
+    RoleDetailComponent,
+    UserComponent,
+    UserDetailComponent,
+    SetPasswordComponent,
+  ],
   imports: [
     SharedModule,
     PanelModule,
@@ -50,6 +59,12 @@ import { RoleDetailComponent } from './role/role-detail.component';
     PickListModule,
     KeyFilterModule,
   ],
-  entryComponents: [RoleComponent, RoleDetailComponent],
+  entryComponents: [
+    RoleComponent,
+    RoleDetailComponent,
+    UserComponent,
+    UserDetailComponent,
+    SetPasswordComponent,
+  ],
 })
 export class SystemModule {}

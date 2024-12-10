@@ -77,7 +77,8 @@ namespace HR.Management.Systems.Users
             if (query.Any(i => i.UserName == input.UserName))
                 throw new UserFriendlyException("Tài khoản đã tồn tại");
 
-            if (query.Any(i => i.Email == input.Email))
+            var isEmailExisted = query.Any(email => email.Email == input.Email);
+            if (isEmailExisted)
                 throw new UserFriendlyException("Email đã tồn tại");
 
             var userId = Guid.NewGuid();
