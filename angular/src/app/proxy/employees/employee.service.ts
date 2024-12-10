@@ -70,6 +70,16 @@ export class EmployeeService {
     { apiName: this.apiName });
   
 
+  getThumbnailImage = (fileName: string) =>
+    this.restService.request<any, string>({
+      method: 'GET',
+      responseType: 'text',
+      url: '/api/app/employee/thumbnail-image',
+      params: { fileName },
+    },
+    { apiName: this.apiName });
+  
+
   update = (id: string, input: CreateUpdateEmployeeDto) =>
     this.restService.request<any, EmployeeDto>({
       method: 'PUT',

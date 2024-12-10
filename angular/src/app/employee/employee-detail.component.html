@@ -30,6 +30,15 @@
         ></app-validation-message>
       </div>
       <div class="field col-12">
+        <label for="dateOfBirth" class="block">Ngày sinh</label>
+        <p-calendar formControlName="dateOfBirth" class="w-full" dateFormat="dd/mm/yy"></p-calendar>
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="dateOfBirth"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
         <label for="departmentId" class="block">Chi nhánh<span class="required">*</span></label>
         <p-dropdown
           [options]="departments"
@@ -48,7 +57,7 @@
       <div class="field col-12">
         <label for="positionId" class="block">Vị trí<span class="required">*</span></label>
         <p-dropdown
-          [options]="departments"
+          [options]="positions"
           formControlName="positionId"
           placeholder="Chọn vị trí"
           [showClear]="true"
@@ -66,7 +75,7 @@
         <p-dropdown
           [options]="genderTypes"
           formControlName="genderType"
-          placeholder="Chọn chi nhánh"
+          placeholder="Chọn giới tính"
           [showClear]="true"
           autoWidth="false"
           [style]="{ width: '100%' }"
@@ -87,7 +96,23 @@
         ></app-validation-message>
       </div>
       <div class="field col-12">
-        <label for="email" class="block">Email</label>
+        <label for="phoneNumber" class="block">Số điện thoại</label>
+        <input
+          id="phoneNumber"
+          pInputText
+          class="w-full"
+          type="text"
+          formControlName="phoneNumber"
+          ð
+        />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="phoneNumber"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="email" class="block">Email cá nhân</label>
         <input id="email" pInputText class="w-full" type="text" formControlName="email" ð />
         <app-validation-message
           [entityForm]="form"
@@ -98,7 +123,7 @@
 
       <div class="field col-12">
         <label for="hireDate" class="block">Ngày vào làm</label>
-        <input id="hireDate" pInputText class="w-full" type="text" formControlName="hireDate" ð />
+        <p-calendar formControlName="hireDate" class="w-full"></p-calendar>
         <app-validation-message
           [entityForm]="form"
           fieldName="hireDate"
@@ -107,7 +132,7 @@
       </div>
       <div class="field col-12">
         <label for="salary" class="block">Mức lương</label>
-        <input id="salary" pInputText class="w-full" type="text" formControlName="salary" ð />
+        <p-inputNumber formControlName="salary" mode="decimal"></p-inputNumber>
         <app-validation-message
           [entityForm]="form"
           fieldName="salary"
@@ -129,6 +154,18 @@
           fieldName="nationality"
           [validationMessages]="validationMessages"
         ></app-validation-message>
+      </div>
+      <div class="field col-12 md:col-6">
+        <label for="thumbnailImage" class="block">Hình ảnh</label>
+        <input type="file" id="thumbnailImage" (change)="onFileChange($event)" class="w-full" />
+      </div>
+      <div class="field col-12 md:col-6">
+        <p-image
+          [src]="thumbnailImage"
+          [alt]="selectedEntity.lastName"
+          width="250"
+          [preview]="true"
+        ></p-image>
       </div>
       <div class="field col-12">
         <label for="maritalStatus" class="block">Tình trạng hôn nhân</label>
@@ -159,6 +196,15 @@
         <app-validation-message
           [entityForm]="form"
           fieldName="educationLevel"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="civilId" class="block">Số CCCD</label>
+        <input id="civilId" pInputText class="w-full" type="text" formControlName="civilId" ð />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="civilId"
           [validationMessages]="validationMessages"
         ></app-validation-message>
       </div>

@@ -11,5 +11,7 @@ namespace HR.Management.Employees
         Task<PagedResultDto<EmployeeInListDto>> GetListFilterAsync(EmployeeListFilter filter);
         Task<List<EmployeeInListDto>> GetListAllAsync();
         Task DeleteMultipleAsync(IEnumerable<Guid> ids);
+
+        Task<string> GetThumbnailImageAsync(string fileName);
     }
 }

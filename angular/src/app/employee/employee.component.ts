@@ -25,6 +25,8 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
   keyword: string = '';
 
+  public thumbnailImage;
+
   constructor(
     private employeeService: EmployeeService,
     private dialogService: DialogService,
@@ -91,6 +93,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
     ref.onClose.subscribe((data: EmployeeDto) => {
       if (data) {
         this.loadData();
+        this.selectedItems = [];
         this.notificationService.showSuccess('Thêm department thành công');
       }
     });
@@ -117,6 +120,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
           this.notificationService.showSuccess('Xóa thành công');
           this.toggleBlockUI(false);
           this.loadData();
+          this.selectedItems = [];
         },
       });
   }

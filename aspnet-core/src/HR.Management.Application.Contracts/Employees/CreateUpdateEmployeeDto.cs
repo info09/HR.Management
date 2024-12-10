@@ -4,6 +4,8 @@ namespace HR.Management.Employees
 {
     public class CreateUpdateEmployeeDto
     {
+        public string Code { get; set; }
+        public string CivilId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
@@ -15,11 +17,8 @@ namespace HR.Management.Employees
         public Guid PositionId { get; set; }
         public DateTime HireDate { get; set; }
         public decimal Salary { get; set; }
-        public bool Status { get; set; }
         public string Nationality { get; set; }
         public string MaritalStatus { get; set; }
-        public string EmergencyContact { get; set; }
-        public string EmergencyPhone { get; set; }
         public string EducationLevel { get; set; }
         public string ThumbnailPictureName { get; set; }
         public string ThumbnailPictureContent { get; set; }

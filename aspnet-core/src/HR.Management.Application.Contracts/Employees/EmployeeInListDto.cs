@@ -6,6 +6,7 @@ namespace HR.Management.Employees
     public class EmployeeInListDto : EntityDto<Guid>
     {
         public string Code { get; set; }
+        public string CivilId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
@@ -20,12 +21,12 @@ namespace HR.Management.Employees
         public bool Status { get; set; }
         public string Nationality { get; set; }
         public string MaritalStatus { get; set; }
-        public string EmergencyContact { get; set; }
-        public string EmergencyPhone { get; set; }
         public string EducationLevel { get; set; }
-        public byte[] Photo { get; set; }
+        public string ThumbnailPicture { get; set; }
         public string BankAccountNumber { get; set; }
         public string TaxCode { get; set; }
         public string SocialInsurance { get; set; }
+        public string PositionName { get; set; }
+        public string DepartmentName { get; set; }
     }
 }

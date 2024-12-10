@@ -17,6 +17,7 @@ import { BadgeModule } from 'primeng/badge';
 import { EmployeeRoutingModule } from './employee-routing.module';
 import { EmployeeComponent } from './employee.component';
 import { EmployeeDetailComponent } from './employee-detail.component';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [EmployeeComponent, EmployeeDetailComponent],
@@ -37,6 +38,7 @@ import { EmployeeDetailComponent } from './employee-detail.component';
     BadgeModule,
     ImageModule,
     ConfirmDialogModule,
+    CalendarModule,
   ],
   entryComponents: [EmployeeDetailComponent],
 })

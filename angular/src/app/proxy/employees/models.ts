@@ -3,6 +3,8 @@ import type { EntityDto } from '@abp/ng.core';
 import type { BaseListFilter } from '../models';
 
 export interface CreateUpdateEmployeeDto {
+  code?: string;
+  civilId?: string;
   firstName?: string;
   lastName?: string;
   dateOfBirth?: string;
@@ -14,13 +16,11 @@ export interface CreateUpdateEmployeeDto {
   positionId?: string;
   hireDate?: string;
   salary: number;
-  status: boolean;
   nationality?: string;
   maritalStatus?: string;
-  emergencyContact?: string;
-  emergencyPhone?: string;
   educationLevel?: string;
-  photo: number[];
+  thumbnailPictureName?: string;
+  thumbnailPictureContent?: string;
   bankAccountNumber?: string;
   taxCode?: string;
   socialInsurance?: string;
@@ -28,6 +28,7 @@ export interface CreateUpdateEmployeeDto {
 
 export interface EmployeeDto extends EntityDto<string> {
   code?: string;
+  civilId?: string;
   firstName?: string;
   lastName?: string;
   dateOfBirth?: string;
@@ -42,17 +43,18 @@ export interface EmployeeDto extends EntityDto<string> {
   status: boolean;
   nationality?: string;
   maritalStatus?: string;
-  emergencyContact?: string;
-  emergencyPhone?: string;
   educationLevel?: string;
-  photo: number[];
+  thumbnailPicture?: string;
   bankAccountNumber?: string;
   taxCode?: string;
   socialInsurance?: string;
+  positionName?: string;
+  departmentName?: string;
 }
 
 export interface EmployeeInListDto extends EntityDto<string> {
   code?: string;
+  civilId?: string;
   firstName?: string;
   lastName?: string;
   dateOfBirth?: string;
@@ -67,13 +69,13 @@ export interface EmployeeInListDto extends EntityDto<string> {
   status: boolean;
   nationality?: string;
   maritalStatus?: string;
-  emergencyContact?: string;
-  emergencyPhone?: string;
   educationLevel?: string;
-  photo: number[];
+  thumbnailPicture?: string;
   bankAccountNumber?: string;
   taxCode?: string;
   socialInsurance?: string;
+  positionName?: string;
+  departmentName?: string;
 }
 
 export interface EmployeeListFilter extends BaseListFilter {
