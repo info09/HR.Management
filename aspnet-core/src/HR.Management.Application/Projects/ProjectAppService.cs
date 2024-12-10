@@ -47,8 +47,17 @@ namespace HR.Management.Projects
 
             var totalCount = await AsyncExecuter.LongCountAsync(query);
             var data = await AsyncExecuter.ToListAsync(query.Skip(filter.SkipCount).Take(filter.MaxResultCount));
+            var result = data.Select(i => new ProjectInListDto()
+            {
+                StartDate = TimeZoneInfo.ConvertTimeFromUtc(i.StartDate, TimeZoneInfo.Local),
+                EndDate = i.EndDate.HasValue ? TimeZoneInfo.ConvertTimeFromUtc(i.EndDate.Value, TimeZoneInfo.Local) : null,
+                Code = i.Code,
+                Name = i.Name,
+                Budget = i.Budget,
+                Id = i.Id
+            }).ToList();
 
-            return new PagedResultDto<ProjectInListDto>(totalCount, ObjectMapper.Map<List<Project>, List<ProjectInListDto>>(data));
+            return new PagedResultDto<ProjectInListDto>(totalCount, result);
         }
     }
 }

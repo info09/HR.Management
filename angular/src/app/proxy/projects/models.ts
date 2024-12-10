@@ -5,6 +5,7 @@ export interface CreateUpdateProjectDto {
   startDate?: string;
   endDate?: string;
   budget: number;
+  code?: string;
 }
 
 export interface ProjectDto extends EntityDto<string> {
@@ -12,6 +13,7 @@ export interface ProjectDto extends EntityDto<string> {
   startDate?: string;
   endDate?: string;
   budget: number;
+  code?: string;
 }
 
 export interface ProjectInListDto extends EntityDto<string> {
@@ -19,4 +21,5 @@ export interface ProjectInListDto extends EntityDto<string> {
   startDate?: string;
   endDate?: string;
   budget: number;
+  code?: string;
 }

@@ -24,6 +24,11 @@ const routes: Routes = [
     component: AppLayoutComponent,
   },
   {
+    path: 'project',
+    loadChildren: () => import('./project/project.module').then(m => m.ProjectModule),
+    component: AppLayoutComponent,
+  },
+  {
     path: 'employee',
     loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule),
     component: AppLayoutComponent,

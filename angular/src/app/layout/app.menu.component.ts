@@ -32,6 +32,12 @@ export class AppMenuComponent implements OnInit {
             routerLink: ['/position'],
             permission: 'HrManagementAdmin.Position',
           },
+          {
+            label: 'Dự án',
+            icon: 'pi pi-fw pi-circle',
+            routerLink: ['/project'],
+            permission: 'HrManagementAdmin.Project',
+          },
         ],
       },
       {
