@@ -5,6 +5,7 @@ using HR.Management.Positions;
 using HR.Management.Projects;
 using HR.Management.Roles;
 using HR.Management.Systems.Roles;
+using HR.Management.Systems.Users;
 using Volo.Abp.Identity;
 
 namespace HR.Management;
@@ -47,5 +48,9 @@ public class ManagementApplicationAutoMapperProfile : Profile
             :
             null));
         CreateMap<CreateUpdateRoleDto, IdentityRole>();
+
+        //User
+        CreateMap<IdentityUser, UserDto>();
+        CreateMap<IdentityUser, UserInListDto>();
     }
 }
