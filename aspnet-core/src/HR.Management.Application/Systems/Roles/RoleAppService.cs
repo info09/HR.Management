@@ -17,6 +17,7 @@ using Volo.Abp.SimpleStateChecking;
 
 namespace HR.Management.Systems.Roles
 {
+    [Authorize(IdentityPermissions.Roles.Default, Policy = "AdminOnly")]
     public class RoleAppService : CrudAppService<IdentityRole, RoleDto, Guid, PagedResultRequestDto, CreateUpdateRoleDto, CreateUpdateRoleDto>, IRoleAppService
     {
         protected PermissionManagementOptions Options { get; }
@@ -33,14 +34,22 @@ namespace HR.Management.Systems.Roles
             PermissionManager = permissionManager;
             PermissionDefinitionManager = permissionDefinitionManager;
             SimpleStateCheckerManager = simpleStateCheckerManager;
+
+            GetPolicyName = IdentityPermissions.Roles.Default;
+            GetListPolicyName = IdentityPermissions.Roles.Default;
+            CreatePolicyName = IdentityPermissions.Roles.Create;
+            UpdatePolicyName = IdentityPermissions.Roles.Update;
+            DeletePolicyName = IdentityPermissions.Roles.Delete;
         }
 
+        [Authorize(IdentityPermissions.Roles.Delete)]
         public async Task DeleteMultipleAsync(IEnumerable<Guid> ids)
         {
             await Repository.DeleteManyAsync(ids);
             await UnitOfWorkManager.Current.SaveChangesAsync();
         }
 
+        [Authorize(IdentityPermissions.Roles.Default)]
         public async Task<List<RoleInListDto>> GetListAllAsync()
         {
             var query = await Repository.GetQueryableAsync();
@@ -48,6 +57,7 @@ namespace HR.Management.Systems.Roles
             return ObjectMapper.Map<List<IdentityRole>, List<RoleInListDto>>(data);
         }
 
+        [Authorize(IdentityPermissions.Roles.Default)]
         public async Task<PagedResultDto<RoleInListDto>> GetListFilterAsync(BaseListFilter input)
         {
             var query = await Repository.GetQueryableAsync();
@@ -59,6 +69,7 @@ namespace HR.Management.Systems.Roles
             return new PagedResultDto<RoleInListDto>(totalCount, ObjectMapper.Map<List<IdentityRole>, List<RoleInListDto>>(data));
         }
 
+        [Authorize(IdentityPermissions.Roles.Create)]
         public override async Task<RoleDto> CreateAsync(CreateUpdateRoleDto input)
         {
             var query = await Repository.GetQueryableAsync();
@@ -75,6 +86,7 @@ namespace HR.Management.Systems.Roles
             return ObjectMapper.Map<IdentityRole, RoleDto>(data);
         }
 
+        [Authorize(IdentityPermissions.Roles.Update)]
         public async override Task<RoleDto> UpdateAsync(Guid id, CreateUpdateRoleDto input)
         {
             var role = await Repository.GetAsync(id);
@@ -95,6 +107,7 @@ namespace HR.Management.Systems.Roles
             return ObjectMapper.Map<IdentityRole, RoleDto>(data);
         }
 
+        [Authorize(IdentityPermissions.Roles.Default)]
         public async Task<GetPermissionListResultDto> GetPermissionsAsync(string providerName, string providerKey)
         {
             //await CheckProviderPolicy(providerName);
@@ -165,6 +178,8 @@ namespace HR.Management.Systems.Roles
                 Permissions = new List<PermissionGrantInfoDto>(),
             };
         }
+
+        [Authorize(IdentityPermissions.Roles.Update)]
         public virtual async Task UpdatePermissionsAsync(string providerName, string providerKey, UpdatePermissionsDto input)
         {
             // await CheckProviderPolicy(providerName);

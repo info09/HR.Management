@@ -1,5 +1,7 @@
 ﻿using HR.Management.Departments;
+using HR.Management.Permissions;
 using HR.Management.Positions;
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace HR.Management.Employees
 {
+    [Authorize(ManagementPermissions.Employee.Default, Policy = "AdminOnly")]
     public class EmployeeAppService : CrudAppService<Employee, EmployeeDto, Guid, PagedResultRequestDto, CreateUpdateEmployeeDto, CreateUpdateEmployeeDto>, IEmployeeAppService
     {
         private readonly IBlobContainer<EmployeeThumbnailPictureContainer> _pictureContainer;
@@ -25,14 +28,22 @@ namespace HR.Management.Employees
             _employeeManager = employeeManager;
             _departmentRepository = departmentRepository;
             _positionRepository = positionRepository;
+
+            GetPolicyName = ManagementPermissions.Department.Default;
+            GetListPolicyName = ManagementPermissions.Department.Default;
+            CreatePolicyName = ManagementPermissions.Department.Create;
+            UpdatePolicyName = ManagementPermissions.Department.Update;
+            DeletePolicyName = ManagementPermissions.Department.Delete;
         }
 
+        [Authorize(ManagementPermissions.Employee.Delete)]
         public async Task DeleteMultipleAsync(IEnumerable<Guid> ids)
         {
             await Repository.DeleteManyAsync(ids);
             await UnitOfWorkManager.Current.SaveChangesAsync();
         }
 
+        [Authorize(ManagementPermissions.Employee.Default)]
         public async Task<List<EmployeeInListDto>> GetListAllAsync()
         {
             var query = await Repository.GetQueryableAsync();
@@ -40,6 +51,7 @@ namespace HR.Management.Employees
             return ObjectMapper.Map<List<Employee>, List<EmployeeInListDto>>(data);
         }
 
+        [Authorize(ManagementPermissions.Employee.Default)]
         public async Task<PagedResultDto<EmployeeInListDto>> GetListFilterAsync(EmployeeListFilter filter)
         {
             var query = await Repository.GetQueryableAsync();
@@ -58,6 +70,7 @@ namespace HR.Management.Employees
             return new PagedResultDto<EmployeeInListDto>(totalCount, ObjectMapper.Map<List<Employee>, List<EmployeeInListDto>>(data));
         }
 
+        [Authorize(ManagementPermissions.Employee.Create)]
         public override async Task<EmployeeDto> CreateAsync(CreateUpdateEmployeeDto input)
         {
             var employee = await _employeeManager.CreateAsync(input.Code, input.FirstName, input.LastName, input.CivilId, input.DateOfBirth, input.GenderType, input.PhoneNumber, input.Email, input.Address, input.DepartmentId,
@@ -75,6 +88,7 @@ namespace HR.Management.Employees
             return ObjectMapper.Map<Employee, EmployeeDto>(result);
         }
 
+        [Authorize(ManagementPermissions.Employee.Update)]
         public override async Task<EmployeeDto> UpdateAsync(Guid id, CreateUpdateEmployeeDto input)
         {
             var employee = await Repository.GetAsync(id) ?? throw new BusinessException(ManagementDomainErrorCodes.EmployeeIsNotExists);
@@ -128,6 +142,7 @@ namespace HR.Management.Employees
             await _pictureContainer.SaveAsync(fileName, bytes, overrideExisting: true);
         }
 
+        [Authorize(ManagementPermissions.Employee.Default)]
         public async Task<string> GetThumbnailImageAsync(string fileName)
         {
             if (string.IsNullOrEmpty(fileName)) return null;

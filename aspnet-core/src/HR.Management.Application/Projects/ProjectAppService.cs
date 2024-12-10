@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HR.Management.Permissions;
+using Microsoft.AspNetCore.Authorization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,18 +10,26 @@ using Volo.Abp.Domain.Repositories;
 
 namespace HR.Management.Projects
 {
+    [Authorize(ManagementPermissions.Project.Default, Policy = "AdminOnly")]
     public class ProjectAppService : CrudAppService<Project, ProjectDto, Guid, PagedResultRequestDto, CreateUpdateProjectDto, CreateUpdateProjectDto>, IProjectAppService
     {
         public ProjectAppService(IRepository<Project, Guid> repository) : base(repository)
         {
+            GetPolicyName = ManagementPermissions.Project.Default;
+            GetListPolicyName = ManagementPermissions.Project.Default;
+            CreatePolicyName = ManagementPermissions.Project.Create;
+            UpdatePolicyName = ManagementPermissions.Project.Update;
+            DeletePolicyName = ManagementPermissions.Project.Delete;
         }
 
+        [Authorize(ManagementPermissions.Project.Delete)]
         public async Task DeleteMultileAsync(IEnumerable<Guid> ids)
         {
             await Repository.DeleteManyAsync(ids);
             await UnitOfWorkManager.Current.SaveChangesAsync();
         }
 
+        [Authorize(ManagementPermissions.Project.Default)]
         public async Task<List<ProjectInListDto>> GetListAllAsync()
         {
             var query = await Repository.GetQueryableAsync();
@@ -28,6 +38,7 @@ namespace HR.Management.Projects
             return ObjectMapper.Map<List<Project>, List<ProjectInListDto>>(data);
         }
 
+        [Authorize(ManagementPermissions.Project.Default)]
         public async Task<PagedResultDto<ProjectInListDto>> GetListFilterAsync(BaseListFilter filter)
         {
             var query = await Repository.GetQueryableAsync();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,20 +12,29 @@ using Volo.Abp.Identity;
 
 namespace HR.Management.Systems.Users
 {
+    [Authorize(IdentityPermissions.Users.Default, Policy = "AdminOnly")]
     public class UserAppService : CrudAppService<IdentityUser, UserDto, Guid, PagedResultRequestDto, CreateUserDto, UpdateUserDto>, IUserAppService
     {
         private readonly IdentityUserManager _identityUserManager;
         public UserAppService(IRepository<IdentityUser, Guid> repository, IdentityUserManager identityUserManager) : base(repository)
         {
             _identityUserManager = identityUserManager;
+
+            GetPolicyName = IdentityPermissions.Users.Default;
+            GetListPolicyName = IdentityPermissions.Users.Default;
+            CreatePolicyName = IdentityPermissions.Users.Create;
+            UpdatePolicyName = IdentityPermissions.Users.Update;
+            DeletePolicyName = IdentityPermissions.Users.Delete;
         }
 
+        [Authorize(IdentityPermissions.Users.Delete)]
         public async Task DeleteMultipleAsync(IEnumerable<Guid> ids)
         {
             await Repository.DeleteManyAsync(ids);
             await UnitOfWorkManager.Current.SaveChangesAsync();
         }
 
+        [Authorize(IdentityPermissions.Users.Default)]
         public async Task<List<UserInListDto>> GetListAllAsync(string filterKeyword)
         {
             var query = await Repository.GetQueryableAsync();
@@ -38,6 +48,7 @@ namespace HR.Management.Systems.Users
             return ObjectMapper.Map<List<IdentityUser>, List<UserInListDto>>(data);
         }
 
+        [Authorize(IdentityPermissions.Users.Default)]
         public async Task<PagedResultDto<UserInListDto>> GetListWithFilterAsync(BaseListFilter input)
         {
             var query = await Repository.GetQueryableAsync();
@@ -50,6 +61,7 @@ namespace HR.Management.Systems.Users
             return new PagedResultDto<UserInListDto>(totalCount, ObjectMapper.Map<List<IdentityUser>, List<UserInListDto>>(data));
         }
 
+        [Authorize(IdentityPermissions.Users.Update)]
         public async Task SetPasswordAsync(Guid userId, SetPasswordDto input)
         {
             var user = await _identityUserManager.FindByIdAsync(userId.ToString()) ?? throw new EntityNotFoundException(typeof(IdentityUser), userId);
@@ -71,6 +83,7 @@ namespace HR.Management.Systems.Users
             }
         }
 
+        [Authorize(IdentityPermissions.Users.Create)]
         public override async Task<UserDto> CreateAsync(CreateUserDto input)
         {
             var query = await Repository.GetQueryableAsync();
@@ -103,6 +116,7 @@ namespace HR.Management.Systems.Users
             }
         }
 
+        [Authorize(IdentityPermissions.Users.Update)]
         public override async Task<UserDto> UpdateAsync(Guid id, UpdateUserDto input)
         {
             var user = await _identityUserManager.FindByIdAsync(id.ToString()) ?? throw new EntityNotFoundException(typeof(IdentityUser), id);
@@ -126,6 +140,7 @@ namespace HR.Management.Systems.Users
             }
         }
 
+        [Authorize(IdentityPermissions.Users.Default)]
         public override async Task<UserDto> GetAsync(Guid id)
         {
             var user = await _identityUserManager.FindByIdAsync(id.ToString()) ?? throw new EntityNotFoundException(typeof(IdentityUser), id);
@@ -136,6 +151,7 @@ namespace HR.Management.Systems.Users
             return userDto;
         }
 
+        [Authorize(IdentityPermissions.Users.Update)]
         public async Task AssignRolesAsync(Guid userId, string[] roleNames)
         {
             var user = await _identityUserManager.FindByIdAsync(userId.ToString()) ?? throw new EntityNotFoundException(typeof(IdentityUser), userId);

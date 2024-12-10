@@ -20,22 +20,45 @@ export class AppMenuComponent implements OnInit {
       {
         label: 'Thông tin chung',
         items: [
-          { label: 'Chi nhánh', icon: 'pi pi-fw pi-circle', routerLink: ['/department'] },
-          { label: 'Vị trí', icon: 'pi pi-fw pi-circle', routerLink: ['/position'] },
+          {
+            label: 'Chi nhánh',
+            icon: 'pi pi-fw pi-circle',
+            routerLink: ['/department'],
+            permission: 'HrManagementAdmin.Department',
+          },
+          {
+            label: 'Vị trí',
+            icon: 'pi pi-fw pi-circle',
+            routerLink: ['/position'],
+            permission: 'HrManagementAdmin.Position',
+          },
         ],
       },
       {
         label: 'Thông tin nhân viên',
-        items: [{ label: 'Nhân viên', icon: 'pi pi-fw pi-circle', routerLink: ['/employee'] }],
+        items: [
+          {
+            label: 'Nhân viên',
+            icon: 'pi pi-fw pi-circle',
+            routerLink: ['/employee'],
+            permission: 'HrManagementAdmin.Employee',
+          },
+        ],
       },
       {
         label: 'Hệ thống',
         items: [
-          { label: 'Quyền người dùng', icon: 'pi pi-fw pi-circle', routerLink: ['/system/role'] },
+          {
+            label: 'Quyền người dùng',
+            icon: 'pi pi-fw pi-circle',
+            routerLink: ['/system/role'],
+            permission: 'AbpIdentity.Roles',
+          },
           {
             label: 'Tài khoản người dùng',
             icon: 'pi pi-fw pi-circle',
             routerLink: ['/system/user'],
+            permission: 'AbpIdentity.Users',
           },
         ],
       },
