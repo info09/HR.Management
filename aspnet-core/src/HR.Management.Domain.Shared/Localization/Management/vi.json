@@ -1,6 +1,7 @@
 {
   "culture": "vi",
   "texts": {
+    "Permission:HrGroup": "HrGroupAdmin",
     "Permission:Department": "Chi nhánh",
     "Permission:Department.Create": "Tạo mới chi nhánh",
     "Permission:Department.Update": "Cập nhật chi nhánh",

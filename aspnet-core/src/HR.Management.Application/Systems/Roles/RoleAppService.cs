@@ -103,7 +103,7 @@ namespace HR.Management.Systems.Roles
                 EntityDisplayName = providerKey,
                 Groups = new List<PermissionGroupDto>()
             };
-            foreach (var group in PermissionDefinitionManager.GetGroups().Where(x => x.Name.StartsWith("AbpIdentity") || x.Name.StartsWith("TeduEcomAdmin")))
+            foreach (var group in PermissionDefinitionManager.GetGroups().Where(x => x.Name.StartsWith("AbpIdentity") || x.Name.StartsWith("HrManagementAdmin")))
             {
                 var groupDto = CreatePermissionGroupDto(group);
                 var neededCheckPermissions = new List<PermissionDefinition>();

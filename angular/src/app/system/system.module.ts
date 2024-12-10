@@ -26,6 +26,7 @@ import { RoleDetailComponent } from './role/role-detail.component';
 import { UserComponent } from './user/user.component';
 import { UserDetailComponent } from './user/user-detail.component';
 import { SetPasswordComponent } from './user/set-password.component';
+import { PermissionGrantComponent } from './role/permission-grant.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { SetPasswordComponent } from './user/set-password.component';
     UserComponent,
     UserDetailComponent,
     SetPasswordComponent,
+    PermissionGrantComponent,
   ],
   imports: [
     SharedModule,
@@ -65,6 +67,7 @@ import { SetPasswordComponent } from './user/set-password.component';
     UserComponent,
     UserDetailComponent,
     SetPasswordComponent,
+    PermissionGrantComponent,
   ],
 })
 export class SystemModule {}

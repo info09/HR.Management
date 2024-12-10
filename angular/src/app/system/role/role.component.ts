@@ -7,6 +7,7 @@ import { ConfirmationService } from 'primeng/api';
 import { RoleDto, RoleInListDto, RoleService } from '@proxy/systems/roles';
 import { RoleDetailComponent } from './role-detail.component';
 import { MessageConstants } from 'src/app/shared/constants/messages.const';
+import { PermissionGrantComponent } from './permission-grant.component';
 
 @Component({
   selector: 'app-role',
@@ -153,22 +154,22 @@ export class RoleComponent implements OnInit, OnDestroy {
       });
   }
 
-  //   showPermissionModal(id: string, name: string) {
-  //     const ref = this.dialogService.open(PermissionGrantComponent, {
-  //       data: {
-  //         id: id,
-  //         name: name,
-  //       },
-  //       header: name,
-  //       width: '70%',
-  //     });
+  showPermissionModal(id: string, name: string) {
+    const ref = this.dialogService.open(PermissionGrantComponent, {
+      data: {
+        id: id,
+        name: name,
+      },
+      header: name,
+      width: '70%',
+    });
 
-  //     ref.onClose.subscribe((data: RoleDto) => {
-  //       if (data) {
-  //         this.notificationService.showSuccess(MessageConstants.UPDATED_OK_MSG);
-  //         this.selectedItems = [];
-  //         this.loadData(data.id);
-  //       }
-  //     });
-  //   }
+    ref.onClose.subscribe((data: RoleDto) => {
+      if (data) {
+        this.notificationService.showSuccess(MessageConstants.UPDATED_OK_MSG);
+        this.selectedItems = [];
+        this.loadData(data.id);
+      }
+    });
+  }
 }
