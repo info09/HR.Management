@@ -177,8 +177,6 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
         this.selectedEntity.socialInsurance || null,
         Validators.required
       ),
-      thumbnailPictureName: new FormControl(this.selectedEntity.thumbnailPicture || null),
-      thumbnailPictureContent: new FormControl(null),
     });
   }
 

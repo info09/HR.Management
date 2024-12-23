@@ -13,5 +13,6 @@ namespace HR.Management.Employees
         Task DeleteMultipleAsync(IEnumerable<Guid> ids);
 
         Task<string> GetThumbnailImageAsync(string fileName);
+        Task<EmployeeDto> UpdateImage(Guid id, UpdateImageEmployeeDto input);
     }
 }

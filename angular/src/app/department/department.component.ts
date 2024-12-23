@@ -85,7 +85,7 @@ export class DepartmentComponent implements OnInit, OnDestroy {
 
   showAddModal() {
     const ref = this.dialogService.open(DepartmentDetailComponent, {
-      header: 'Thêm mới sản phẩm',
+      header: 'Thêm mới chi nhánh',
       width: '70%',
     });
     ref.onClose.subscribe((data: DepartmentDto) => {

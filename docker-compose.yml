@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  #database section
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+
+  redis:
+    image: redis:alpine
+
+#network section
+networks:
+  default:
+    name: tedu_microservices
+    driver: bridge
+
+#volumes sections
+volumes:
+  sqlserver_data:
+    name: sqlserver_data

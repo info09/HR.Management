@@ -82,3 +82,8 @@ export interface EmployeeListFilter extends BaseListFilter {
   departmentId?: string;
   positionId?: string;
 }
+
+export interface UpdateImageEmployeeDto {
+  thumbnailPictureName?: string;
+  thumbnailPictureContent?: string;
+}

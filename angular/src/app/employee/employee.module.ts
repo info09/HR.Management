@@ -18,9 +18,16 @@ import { EmployeeRoutingModule } from './employee-routing.module';
 import { EmployeeComponent } from './employee.component';
 import { EmployeeDetailComponent } from './employee-detail.component';
 import { CalendarModule } from 'primeng/calendar';
+import { EmployeeImageComponent } from './employee-image.component';
+import { EmployeeEducationComponent } from './employee-education.component';
 
 @NgModule({
-  declarations: [EmployeeComponent, EmployeeDetailComponent],
+  declarations: [
+    EmployeeComponent,
+    EmployeeDetailComponent,
+    EmployeeImageComponent,
+    EmployeeEducationComponent,
+  ],
   imports: [
     SharedModule,
     EmployeeRoutingModule,
@@ -40,6 +47,6 @@ import { CalendarModule } from 'primeng/calendar';
     ConfirmDialogModule,
     CalendarModule,
   ],
-  entryComponents: [EmployeeDetailComponent],
+  entryComponents: [EmployeeDetailComponent, EmployeeImageComponent, EmployeeEducationComponent],
 })
 export class EmployeeModule {}

@@ -66,6 +66,7 @@
         <th>Vị trí</th>
         <th>Chi nhánh</th>
         <th>Địa chỉ</th>
+        <th></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-row>
@@ -79,7 +80,28 @@
         <td>{{ row.positionName }}</td>
         <td>{{ row.departmentName }}</td>
         <td>{{ row.address }}</td>
-        <td></td>
+        <td>
+          <button
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-info-circle"
+            pTooltip="Gán vai trò"
+            tooltipPosition="top"
+            class="p-button-rounded p-button-text"
+            (click)="showImage(row.id)"
+          ></button>
+          <button
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-globe"
+            pTooltip="Gán vai trò"
+            tooltipPosition="top"
+            class="p-button-rounded p-button-text"
+            (click)="showEducation(row.id)"
+          ></button>
+        </td>
       </tr>
     </ng-template>
     <ng-template pTemplate="summary">

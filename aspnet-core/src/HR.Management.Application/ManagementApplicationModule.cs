@@ -37,7 +37,7 @@ public class ManagementApplicationModule : AbpModule
             {
                 container.UseFileSystem(fileSystem =>
                 {
-                    fileSystem.BasePath = "C:\\hr-eployee";
+                    fileSystem.BasePath = "C:\\hr-employee";
                 });
             });
         }));

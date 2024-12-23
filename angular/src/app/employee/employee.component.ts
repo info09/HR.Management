@@ -6,6 +6,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { ConfirmationService } from 'primeng/api';
 import { EmployeeDto, EmployeeInListDto, EmployeeService } from '@proxy/employees';
 import { EmployeeDetailComponent } from './employee-detail.component';
+import { EmployeeImageComponent } from './employee-image.component';
 
 @Component({
   selector: 'app-employee',
@@ -73,7 +74,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
       data: {
         id: id,
       },
-      header: 'Cập nhật sản phẩm',
+      header: 'Cập nhật nhân viên',
       width: '70%',
     });
     ref.onClose.subscribe((data: EmployeeDto) => {
@@ -87,7 +88,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
   showAddModal() {
     const ref = this.dialogService.open(EmployeeDetailComponent, {
-      header: 'Thêm mới sản phẩm',
+      header: 'Thêm mới nhân viên',
       width: '70%',
     });
     ref.onClose.subscribe((data: EmployeeDto) => {
@@ -95,6 +96,22 @@ export class EmployeeComponent implements OnInit, OnDestroy {
         this.loadData();
         this.selectedItems = [];
         this.notificationService.showSuccess('Thêm department thành công');
+      }
+    });
+  }
+
+  showImage(id: string) {
+    const ref = this.dialogService.open(EmployeeImageComponent, {
+      data: {
+        id: id,
+      },
+      header: 'Ảnh nhân viên',
+      width: '70%',
+    });
+    ref.onClose.subscribe((data: EmployeeDto) => {
+      if (data) {
+        this.loadData();
+        this.selectedItems = [];
       }
     });
   }

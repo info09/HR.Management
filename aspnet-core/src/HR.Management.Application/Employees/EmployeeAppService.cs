@@ -154,5 +154,19 @@ namespace HR.Management.Employees
             var result = Convert.ToBase64String(thumbnaiContent);
             return result;
         }
+
+        public async Task<EmployeeDto> UpdateImage(Guid id, UpdateImageEmployeeDto input)
+        {
+            var employee = await Repository.GetAsync(id);
+
+            if (input.ThumbnailPictureContent != null && input.ThumbnailPictureContent.Length > 0)
+            {
+                await SaveThumbnailImageAsync(input.ThumbnailPictureName, input.ThumbnailPictureContent);
+                employee.ThumbnailPicture = input.ThumbnailPictureName;
+                await Repository.UpdateAsync(employee);
+            }
+            await Repository.UpdateAsync(employee);
+            return ObjectMapper.Map<Employee, EmployeeDto>(employee);
+        }
     }
 }

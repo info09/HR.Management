@@ -1,0 +1,30 @@
+<form [formGroup]="form" skipValidation (ngSubmit)="saveChange()">
+  <p-panel #pnl header="Ảnh nhân viên"
+    ><div class="field col-12 md:col-6">
+      <label for="thumbnailImage" class="block">Hình ảnh</label>
+      <input type="file" id="thumbnailImage" (change)="onFileChange($event)" class="w-full" />
+    </div>
+    <div class="field col-12 md:col-6">
+      <p-image
+        [src]="thumbnailImage"
+        [alt]="selectedEntity.lastName"
+        width="250"
+        [preview]="true"
+      ></p-image>
+    </div>
+    <ng-template pTemplate="footer">
+      <button
+        type="submit"
+        [disabled]="!form.valid || btnDisabled"
+        pButton
+        icon="fa fa-save"
+        iconPos="left"
+        label="Lưu lại"
+      ></button>
+    </ng-template>
+    <!--Block UI-->
+    <p-blockUI [blocked]="blockedPanel" [target]="pnl">
+      <p-progressSpinner></p-progressSpinner>
+    </p-blockUI>
+  </p-panel>
+</form>

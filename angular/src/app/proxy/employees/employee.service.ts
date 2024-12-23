@@ -1,4 +1,4 @@
-import type { CreateUpdateEmployeeDto, EmployeeDto, EmployeeInListDto, EmployeeListFilter } from './models';
+import type { CreateUpdateEmployeeDto, EmployeeDto, EmployeeInListDto, EmployeeListFilter, UpdateImageEmployeeDto } from './models';
 import { RestService } from '@abp/ng.core';
 import type { PagedResultDto, PagedResultRequestDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
@@ -84,6 +84,15 @@ export class EmployeeService {
     this.restService.request<any, EmployeeDto>({
       method: 'PUT',
       url: `/api/app/employee/${id}`,
+      body: input,
+    },
+    { apiName: this.apiName });
+  
+
+  updateImageByIdAndInput = (id: string, input: UpdateImageEmployeeDto) =>
+    this.restService.request<any, EmployeeDto>({
+      method: 'PUT',
+      url: `/api/app/employee/${id}/image`,
       body: input,
     },
     { apiName: this.apiName });
