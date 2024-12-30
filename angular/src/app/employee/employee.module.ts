@@ -19,6 +19,7 @@ import { EmployeeComponent } from './employee.component';
 import { EmployeeDetailComponent } from './employee-detail.component';
 import { CalendarModule } from 'primeng/calendar';
 import { EmployeeImageComponent } from './employee-image.component';
+import { EmployeeEducationDetailComponent } from './employee-education-detail.component';
 import { EmployeeEducationComponent } from './employee-education.component';
 
 @NgModule({
@@ -26,6 +27,7 @@ import { EmployeeEducationComponent } from './employee-education.component';
     EmployeeComponent,
     EmployeeDetailComponent,
     EmployeeImageComponent,
+    EmployeeEducationDetailComponent,
     EmployeeEducationComponent,
   ],
   imports: [
@@ -47,6 +49,11 @@ import { EmployeeEducationComponent } from './employee-education.component';
     ConfirmDialogModule,
     CalendarModule,
   ],
-  entryComponents: [EmployeeDetailComponent, EmployeeImageComponent, EmployeeEducationComponent],
+  entryComponents: [
+    EmployeeDetailComponent,
+    EmployeeImageComponent,
+    EmployeeEducationDetailComponent,
+    EmployeeEducationComponent,
+  ],
 })
 export class EmployeeModule {}

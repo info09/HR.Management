@@ -1,13 +1,12 @@
-import { educationLevelOptions } from './../proxy/employees/education-level.enum';
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DepartmentService } from '@proxy/departments';
-import { EmployeeDto, EmployeeService, graduationTypeOptions } from '@proxy/employees';
-import { PositionService } from '@proxy/positions';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Subject } from 'rxjs';
-import { UtilityService } from '../shared/services/utility.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import { PagedResultDto, PagedResultRequestDto } from '@abp/ng.core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DepartmentDto, DepartmentInListDto, DepartmentService } from '@proxy/departments';
+import { Subject, takeUntil } from 'rxjs';
+import { NotificationService } from '../shared/services/notification.service';
+import { DialogService, DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { ConfirmationService } from 'primeng/api';
+import { EmployeeEducationDetailComponent } from './employee-education-detail.component';
+import { EmployeeService } from '@proxy/employees';
 import { EmployeeEducationDto } from '@proxy/employees/educations';
 
 @Component({
@@ -15,24 +14,24 @@ import { EmployeeEducationDto } from '@proxy/employees/educations';
   templateUrl: './employee-education.component.html',
 })
 export class EmployeeEducationComponent implements OnInit, OnDestroy {
-  public form: FormGroup;
   private ngUnsubscribe = new Subject<void>();
   blockedPanel: boolean = false;
-  btnDisabled = false;
-  selectedEntity = {} as EmployeeEducationDto;
-  educationLevels: any[] = [];
-  graduationTypes: any[] = [];
+  items: DepartmentInListDto[] = [];
+  public selectedItems: DepartmentInListDto[] = [];
+
+  //Paging variables
+  public skipCount: number = 0;
+  public maxResultCount: number = 10;
+  public totalCount: number;
+
+  keyword: string = '';
 
   constructor(
     private employeeService: EmployeeService,
-    private departmentService: DepartmentService,
-    private positionService: PositionService,
-    private fb: FormBuilder,
     private config: DynamicDialogConfig,
-    private ref: DynamicDialogRef,
-    private utilityService: UtilityService,
-    private cd: ChangeDetectorRef,
-    private sanitizer: DomSanitizer
+    private dialogService: DialogService,
+    private notificationService: NotificationService,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnDestroy(): void {
@@ -40,60 +39,18 @@ export class EmployeeEducationComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
   ngOnInit(): void {
-    this.buildForm();
-    this.loadEducation();
-    this.loadEducationLevel();
-    this.loadGraduationType();
+    this.loadData();
   }
 
-  loadEducation() {
-    this.toggleBlockUI(true);
-    if (this.config.data?.employeeId !== 'undefined') {
-      this.employeeService.getEducationByEmployeeId(this.config.data?.employeeId).subscribe({
-        next: (res: EmployeeEducationDto) => {
-          this.selectedEntity = res;
-          if (res !== null) this.buildForm();
-          this.toggleBlockUI(false);
-        },
-        error: () => {
-          this.toggleBlockUI(false);
-        },
-      });
-    }
-    this.toggleBlockUI(false);
-  }
-
-  validationMessages = {
-    code: [{ type: 'required', message: 'Bạn phải nhập mã duy nhất' }],
-    name: [
-      { type: 'required', message: 'Bạn phải nhập tên' },
-      { type: 'maxlength', message: 'Bạn không được nhập quá 255 kí tự' },
-    ],
-    location: [{ type: 'maxlength', message: 'Bạn không được nhập quá 255 kí tự' }],
-  };
-
-  private buildForm() {
-    this.form = this.fb.group({
-      level: new FormControl(this.selectedEntity.level || null, Validators.required),
-      major: new FormControl(this.selectedEntity.major || null, Validators.required),
-      schoolName: new FormControl(this.selectedEntity.schoolName || null, Validators.required),
-      startYear: new FormControl(this.selectedEntity.startYear || null, Validators.required),
-      endYear: new FormControl(this.selectedEntity.endYear || null, Validators.required),
-      graduationType: new FormControl(
-        this.selectedEntity.graduationType || null,
-        Validators.required
-      ),
-    });
-  }
-
-  saveChange() {
+  loadData() {
     this.toggleBlockUI(true);
     this.employeeService
-      .addEducationByEmployeeIdAndInput(this.config.data.employeeId, this.form.value)
+      .getEducationByEmployeeIdByEmployeeId(this.config.data.employeeId)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: (res: EmployeeEducationDto) => {
+        next: (res: DepartmentInListDto[]) => {
+          this.items = res;
           this.toggleBlockUI(false);
-          this.ref.close(res);
         },
         error: () => {
           this.toggleBlockUI(false);
@@ -101,32 +58,48 @@ export class EmployeeEducationComponent implements OnInit, OnDestroy {
       });
   }
 
-  loadEducationLevel() {
-    educationLevelOptions.forEach(element => {
-      this.educationLevels.push({
-        value: element.value,
-        label: element.key,
-      });
+  showEditModal() {
+    if (this.selectedItems.length == 0) {
+      this.notificationService.showError('Bạn phải chọn một bản ghi');
+      return;
+    }
+    const id = this.selectedItems[0].id;
+    const ref = this.dialogService.open(EmployeeEducationDetailComponent, {
+      data: {
+        id: id,
+        employeeId: this.config.data.employeeId,
+      },
+      header: 'Cập nhật học vấn',
+      width: '70%',
+    });
+    ref.onClose.subscribe((data: EmployeeEducationDto) => {
+      if (data) {
+        this.loadData();
+        this.selectedItems = [];
+        this.notificationService.showSuccess('Cập nhật học vấn thành công');
+      }
     });
   }
 
-  loadGraduationType() {
-    graduationTypeOptions.forEach(element => {
-      this.graduationTypes.push({
-        value: element.value,
-        label: element.key,
-      });
+  showAddModal() {
+    const ref = this.dialogService.open(EmployeeEducationDetailComponent, {
+      header: 'Thêm mới học vấn',
+      width: '70%',
+    });
+    ref.onClose.subscribe((data: EmployeeEducationDto) => {
+      if (data) {
+        this.loadData();
+        this.notificationService.showSuccess('Thêm học vấn thành công');
+      }
     });
   }
 
   private toggleBlockUI(enabled: boolean) {
     if (enabled == true) {
       this.blockedPanel = true;
-      this.btnDisabled = true;
     } else {
       setTimeout(() => {
         this.blockedPanel = false;
-        this.btnDisabled = false;
       }, 1000);
     }
   }

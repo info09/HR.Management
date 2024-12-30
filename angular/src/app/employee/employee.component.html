@@ -1,7 +1,7 @@
 <p-panel header="Danh sách chi nhánh">
   <!--Filter (search panel)-->
   <div class="grid">
-    <div class="col-4">
+    <div class="col-8">
       <button
         pButton
         type="button"
@@ -31,7 +31,7 @@
         label="Xóa"
       ></button>
     </div>
-    <div class="col-8">
+    <div class="col-4">
       <div class="formgroup-inline">
         <div class="field">
           <label for="txt-keyword" class="p-sr-only">Từ khóa</label>
@@ -101,6 +101,16 @@
             class="p-button-rounded p-button-text"
             (click)="showEducation(row.id)"
           ></button>
+          <!-- <button
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-globe"
+            pTooltip="Thêm người phụ thuộc"
+            tooltipPosition="top"
+            class="p-button-rounded p-button-text"
+            (click)="showEducation(row.id)"
+          ></button> -->
         </td>
       </tr>
     </ng-template>

@@ -54,10 +54,18 @@ export class EmployeeService {
     { apiName: this.apiName });
   
 
-  getEducationByEmployeeId = (employeeId: string) =>
+  getEducationByEducationIdByEducationId = (educationId: string) =>
     this.restService.request<any, EmployeeEducationDto>({
       method: 'GET',
-      url: `/api/app/employee/education/${employeeId}`,
+      url: `/api/app/employee/education-by-education-id/${educationId}`,
+    },
+    { apiName: this.apiName });
+  
+
+  getEducationByEmployeeIdByEmployeeId = (employeeId: string) =>
+    this.restService.request<any, EmployeeEducationDto[]>({
+      method: 'GET',
+      url: `/api/app/employee/education-by-employee-id/${employeeId}`,
     },
     { apiName: this.apiName });
   
@@ -102,6 +110,16 @@ export class EmployeeService {
     this.restService.request<any, EmployeeDto>({
       method: 'PUT',
       url: `/api/app/employee/${id}`,
+      body: input,
+    },
+    { apiName: this.apiName });
+  
+
+  updateEducationByEmployeeIdAndEducationIdAndInput = (employeeId: string, educationId: string, input: CreateUpdateEmployeeEducationDto) =>
+    this.restService.request<any, EmployeeEducationDto>({
+      method: 'PUT',
+      url: '/api/app/employee/education',
+      params: { employeeId, educationId },
       body: input,
     },
     { apiName: this.apiName });

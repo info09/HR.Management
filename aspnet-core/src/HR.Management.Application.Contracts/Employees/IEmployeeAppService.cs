@@ -17,6 +17,8 @@ namespace HR.Management.Employees
         Task<EmployeeDto> UpdateImage(Guid id, UpdateImageEmployeeDto input);
 
         Task<EmployeeEducationDto> AddEducation(Guid employeeId, CreateUpdateEmployeeEducationDto input);
-        Task<EmployeeEducationDto> GetEducation(Guid employeeId);
+        Task<EmployeeEducationDto> UpdateEducation(Guid employeeId, Guid educationId, CreateUpdateEmployeeEducationDto input);
+        Task<EmployeeEducationDto> GetEducationByEducationId(Guid educationId);
+        Task<List<EmployeeEducationDto>> GetEducationByEmployeeId(Guid employeeId);
     }
 }

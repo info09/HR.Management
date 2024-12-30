@@ -7,6 +7,7 @@ import { ConfirmationService } from 'primeng/api';
 import { EmployeeDto, EmployeeInListDto, EmployeeService } from '@proxy/employees';
 import { EmployeeDetailComponent } from './employee-detail.component';
 import { EmployeeImageComponent } from './employee-image.component';
+import { EmployeeEducationDetailComponent } from './employee-education-detail.component';
 import { EmployeeEducationComponent } from './employee-education.component';
 
 @Component({
@@ -129,6 +130,23 @@ export class EmployeeComponent implements OnInit, OnDestroy {
       if (data) {
         this.loadData();
         this.selectedItems = [];
+      }
+    });
+  }
+
+  addEducation() {
+    const ref = this.dialogService.open(EmployeeEducationDetailComponent, {
+      data: {
+        employeeId: 0,
+      },
+      header: 'Thêm mới học vấn nhân viên',
+      width: '70%',
+    });
+    ref.onClose.subscribe((data: EmployeeDto) => {
+      if (data) {
+        this.loadData();
+        this.selectedItems = [];
+        this.notificationService.showSuccess('Thêm học vấn thành công');
       }
     });
   }

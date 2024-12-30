@@ -7,4 +7,6 @@ public static class ManagementDomainErrorCodes
 
     public const string EmployeeIsNotExists = "Management:EmployeeIsNotExists";
     public const string RoleNameAlreadyExists = "Management:RoleNameAlreadyExists";
+
+    public const string EmployeeEducationIsNotExists = "Management:EmployeeEducationIsNotExists";
 }

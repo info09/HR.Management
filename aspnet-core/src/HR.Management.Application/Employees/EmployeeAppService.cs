@@ -181,13 +181,36 @@ namespace HR.Management.Employees
             return ObjectMapper.Map<EmployeeEducation, EmployeeEducationDto>(result);
         }
 
-        public async Task<EmployeeEducationDto> GetEducation(Guid employeeId)
+        public async Task<EmployeeEducationDto> UpdateEducation(Guid employeeId, Guid educationId, CreateUpdateEmployeeEducationDto input)
+        {
+            var employee = await Repository.GetAsync(employeeId) ?? throw new BusinessException(ManagementDomainErrorCodes.EmployeeIsNotExists);
+            var education = await _employeeEducationRepository.GetAsync(educationId) ?? throw new BusinessException(ManagementDomainErrorCodes.EmployeeEducationIsNotExists);
+
+            education.Level = input.Level;
+            education.Major = input.Major;
+            education.SchoolName = input.SchoolName;
+            education.StartYear = input.StartYear;
+            education.EndYear = input.EndYear;
+            education.GraduationType = input.GraduationType;
+            education.EmployeeId = employeeId;
+            var result = await _employeeEducationRepository.UpdateAsync(education);
+            return ObjectMapper.Map<EmployeeEducation, EmployeeEducationDto>(result);
+        }
+
+        public async Task<EmployeeEducationDto> GetEducationByEducationId(Guid educationId)
+        {
+            var education = await _employeeEducationRepository.GetAsync(educationId);
+
+            return ObjectMapper.Map<EmployeeEducation, EmployeeEducationDto>(education);
+        }
+
+        public async Task<List<EmployeeEducationDto>> GetEducationByEmployeeId(Guid employeeId)
         {
             var query = await _employeeEducationRepository.GetQueryableAsync();
             query = query.Where(i => i.EmployeeId == employeeId);
 
-            var education = await AsyncExecuter.FirstOrDefaultAsync(query);
-            return ObjectMapper.Map<EmployeeEducation, EmployeeEducationDto>(education);
+            var education = await AsyncExecuter.ToListAsync(query);
+            return ObjectMapper.Map<List<EmployeeEducation>, List<EmployeeEducationDto>>(education);
         }
     }
 }

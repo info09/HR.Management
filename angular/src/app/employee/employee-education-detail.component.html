@@ -1,0 +1,100 @@
+<form [formGroup]="form" skipValidation (ngSubmit)="saveChange()">
+  <p-panel #pnl header="Danh sách sản phẩm">
+    <!--form grid-->
+    <div class="formgrid grid">
+      <div class="field col-12">
+        <label for="schoolName" class="block">Trường học <span class="required">*</span></label>
+        <input
+          id="schoolName"
+          pInputText
+          type="text"
+          class="w-full"
+          formControlName="schoolName"
+          ð
+        />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="schoolName"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="level" class="block">Trình độ học vấn<span class="required">*</span></label>
+        <p-dropdown
+          [options]="educationLevels"
+          formControlName="level"
+          placeholder="Chọn trình độ học vấn"
+          [showClear]="true"
+          autoWidth="false"
+          [style]="{ width: '100%' }"
+        ></p-dropdown>
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="level"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="startYear" class="block">Năm bắt đầu <span class="required">*</span></label>
+        <input id="startYear" pInputText type="text" class="w-full" formControlName="startYear" ð />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="startYear"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="endYear" class="block">Năm kết thúc <span class="required">*</span></label>
+        <input id="endYear" pInputText type="text" class="w-full" formControlName="endYear" ð />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="endYear"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+
+      <div class="field col-12">
+        <label for="major" class="block">Chuyên ngành</label>
+        <input id="major" pInputText class="w-full" type="text" formControlName="major" ð />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="major"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+
+      <div class="field col-12">
+        <label for="graduationType" class="block"
+          >Loại tốt nghiệp<span class="required">*</span></label
+        >
+        <p-dropdown
+          [options]="graduationTypes"
+          formControlName="graduationType"
+          placeholder="Chọn loại tốt nghiệp"
+          [showClear]="true"
+          autoWidth="false"
+          [style]="{ width: '100%' }"
+        ></p-dropdown>
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="graduationType"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <button
+        type="submit"
+        [disabled]="!form.valid || btnDisabled"
+        pButton
+        icon="fa fa-save"
+        iconPos="left"
+        label="Lưu lại"
+      ></button>
+    </ng-template>
+    <!--Block UI-->
+    <p-blockUI [blocked]="blockedPanel" [target]="pnl">
+      <p-progressSpinner></p-progressSpinner>
+    </p-blockUI>
+  </p-panel>
+</form>
