@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HR.Management.Employees.Educations;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
@@ -14,5 +15,8 @@ namespace HR.Management.Employees
 
         Task<string> GetThumbnailImageAsync(string fileName);
         Task<EmployeeDto> UpdateImage(Guid id, UpdateImageEmployeeDto input);
+
+        Task<EmployeeEducationDto> AddEducation(Guid employeeId, CreateUpdateEmployeeEducationDto input);
+        Task<EmployeeEducationDto> GetEducation(Guid employeeId);
     }
 }

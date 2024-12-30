@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HR.Management.Departments;
 using HR.Management.Employees;
+using HR.Management.Employees.Educations;
 using HR.Management.Positions;
 using HR.Management.Projects;
 using HR.Management.Roles;
@@ -52,5 +53,9 @@ public class ManagementApplicationAutoMapperProfile : Profile
         //User
         CreateMap<IdentityUser, UserDto>();
         CreateMap<IdentityUser, UserInListDto>();
+
+        // EmployeeEducation
+        CreateMap<EmployeeEducation, EmployeeEducationDto>();
+        CreateMap<CreateUpdateEmployeeEducationDto, EmployeeEducation>();
     }
 }

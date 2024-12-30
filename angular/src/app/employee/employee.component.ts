@@ -7,6 +7,7 @@ import { ConfirmationService } from 'primeng/api';
 import { EmployeeDto, EmployeeInListDto, EmployeeService } from '@proxy/employees';
 import { EmployeeDetailComponent } from './employee-detail.component';
 import { EmployeeImageComponent } from './employee-image.component';
+import { EmployeeEducationComponent } from './employee-education.component';
 
 @Component({
   selector: 'app-employee',
@@ -106,6 +107,22 @@ export class EmployeeComponent implements OnInit, OnDestroy {
         id: id,
       },
       header: 'Ảnh nhân viên',
+      width: '70%',
+    });
+    ref.onClose.subscribe((data: EmployeeDto) => {
+      if (data) {
+        this.loadData();
+        this.selectedItems = [];
+      }
+    });
+  }
+
+  showEducation(id: string) {
+    const ref = this.dialogService.open(EmployeeEducationComponent, {
+      data: {
+        employeeId: id,
+      },
+      header: 'Thông tin học vấn nhân viên',
       width: '70%',
     });
     ref.onClose.subscribe((data: EmployeeDto) => {

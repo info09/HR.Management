@@ -11,7 +11,7 @@ services:
 #network section
 networks:
   default:
-    name: tedu_microservices
+    name: HRM
     driver: bridge
 
 #volumes sections

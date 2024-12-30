@@ -1,9 +1,9 @@
 ﻿using System;
-using Volo.Abp.Domain.Entities;
+using Volo.Abp.Application.Dtos;
 
-namespace HR.Management.Employees
+namespace HR.Management.Employees.Educations
 {
-    public class EmployeeEducation : Entity<Guid>
+    public class EmployeeEducationDto : EntityDto<Guid>
     {
         public Guid EmployeeId { get; set; }
         public EducationLevel Level { get; set; }

@@ -1,4 +1,5 @@
 ﻿using HR.Management.Departments;
+using HR.Management.Employees.Educations;
 using HR.Management.Permissions;
 using HR.Management.Positions;
 using Microsoft.AspNetCore.Authorization;
@@ -22,7 +23,8 @@ namespace HR.Management.Employees
         private readonly EmployeeManager _employeeManager;
         private readonly IRepository<Department, Guid> _departmentRepository;
         private readonly IRepository<Position, Guid> _positionRepository;
-        public EmployeeAppService(IRepository<Employee, Guid> repository, IBlobContainer<EmployeeThumbnailPictureContainer> pictureContainer, EmployeeManager employeeManager, IRepository<Department, Guid> departmentRepository, IRepository<Position, Guid> positionRepository) : base(repository)
+        private readonly IRepository<EmployeeEducation, Guid> _employeeEducationRepository;
+        public EmployeeAppService(IRepository<Employee, Guid> repository, IBlobContainer<EmployeeThumbnailPictureContainer> pictureContainer, EmployeeManager employeeManager, IRepository<Department, Guid> departmentRepository, IRepository<Position, Guid> positionRepository, IRepository<EmployeeEducation, Guid> employeeEducationRepository) : base(repository)
         {
             _pictureContainer = pictureContainer;
             _employeeManager = employeeManager;
@@ -34,6 +36,7 @@ namespace HR.Management.Employees
             CreatePolicyName = ManagementPermissions.Department.Create;
             UpdatePolicyName = ManagementPermissions.Department.Update;
             DeletePolicyName = ManagementPermissions.Department.Delete;
+            _employeeEducationRepository = employeeEducationRepository;
         }
 
         [Authorize(ManagementPermissions.Employee.Delete)]
@@ -167,6 +170,24 @@ namespace HR.Management.Employees
             }
             await Repository.UpdateAsync(employee);
             return ObjectMapper.Map<Employee, EmployeeDto>(employee);
+        }
+
+        public async Task<EmployeeEducationDto> AddEducation(Guid employeeId, CreateUpdateEmployeeEducationDto input)
+        {
+            var employee = await Repository.GetAsync(employeeId) ?? throw new BusinessException(ManagementDomainErrorCodes.EmployeeIsNotExists);
+            var education = ObjectMapper.Map<CreateUpdateEmployeeEducationDto, EmployeeEducation>(input);
+            education.EmployeeId = employeeId;
+            var result = await _employeeEducationRepository.InsertAsync(education);
+            return ObjectMapper.Map<EmployeeEducation, EmployeeEducationDto>(result);
+        }
+
+        public async Task<EmployeeEducationDto> GetEducation(Guid employeeId)
+        {
+            var query = await _employeeEducationRepository.GetQueryableAsync();
+            query = query.Where(i => i.EmployeeId == employeeId);
+
+            var education = await AsyncExecuter.FirstOrDefaultAsync(query);
+            return ObjectMapper.Map<EmployeeEducation, EmployeeEducationDto>(education);
         }
     }
 }

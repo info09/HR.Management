@@ -1,3 +1,4 @@
+import type { CreateUpdateEmployeeEducationDto, EmployeeEducationDto } from './educations/models';
 import type { CreateUpdateEmployeeDto, EmployeeDto, EmployeeInListDto, EmployeeListFilter, UpdateImageEmployeeDto } from './models';
 import { RestService } from '@abp/ng.core';
 import type { PagedResultDto, PagedResultRequestDto } from '@abp/ng.core';
@@ -8,6 +9,15 @@ import { Injectable } from '@angular/core';
 })
 export class EmployeeService {
   apiName = 'Default';
+  
+
+  addEducationByEmployeeIdAndInput = (employeeId: string, input: CreateUpdateEmployeeEducationDto) =>
+    this.restService.request<any, EmployeeEducationDto>({
+      method: 'POST',
+      url: `/api/app/employee/education/${employeeId}`,
+      body: input,
+    },
+    { apiName: this.apiName });
   
 
   create = (input: CreateUpdateEmployeeDto) =>
@@ -40,6 +50,14 @@ export class EmployeeService {
     this.restService.request<any, EmployeeDto>({
       method: 'GET',
       url: `/api/app/employee/${id}`,
+    },
+    { apiName: this.apiName });
+  
+
+  getEducationByEmployeeId = (employeeId: string) =>
+    this.restService.request<any, EmployeeEducationDto>({
+      method: 'GET',
+      url: `/api/app/employee/education/${employeeId}`,
     },
     { apiName: this.apiName });
   
